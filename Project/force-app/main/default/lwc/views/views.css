@@ -1,0 +1,128 @@
+.lgc-bg {
+    background-color: rgb(242, 242, 242);
+}
+
+.lgc-bg-inverse {
+    background-color: rgb(22, 50, 92);
+}
+span p img, .myclass img{
+    height:20px !important ; 
+    width:20px !important ;
+}
+
+
+
+
+.full-view{
+    display: flex;
+    justify-content: space-around;
+}
+.left-bar{
+    /* border: 2px solid black; */
+    width: 30%;
+    display:flex;
+    flex-direction: column;
+    height: auto;
+}
+.right-bar{
+    position:sticky;
+    top:13vh;
+    border: 2px solid lightslategray;
+    width: 60%;
+    height: max-content;
+}
+.less-info{
+   
+    border: 2px solid lightslategray;
+    padding: 20px 10px 20px 20px;
+    margin:10px;
+    border-radius: 10%;
+    font-size:15px;
+    cursor:pointer;
+}
+.less-info:hover{
+    transform: scale(1.1);
+}
+.active{
+    background:orange;
+    color: maroon !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    background-color: transparent;
+    width: 235px;
+    height: 235px;
+    border: 1px solid #000000;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+    background-color: rgb(155, 181, 219);
+    color: black;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    transform: rotateY(180deg);
+    padding-left:10px;
+    padding-top:5px;
+  }
+  
+
+
+
+
+
+
+
+
+.searchcard  { 
+    font-weight: bold;
+}
+.searchbar{
+    margin: 20px;
+    font-weight: normal;
+}
+.icon{
+    margin-bottom: 0px;
+}

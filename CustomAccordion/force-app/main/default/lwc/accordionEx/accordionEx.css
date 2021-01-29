@@ -1,0 +1,10 @@
+.searchcard  { 
+    font-weight: bold;
+}
+.searchbar{
+    margin: 20px;
+    font-weight: normal;
+}
+.icon{
+    margin-bottom: 0px;
+}

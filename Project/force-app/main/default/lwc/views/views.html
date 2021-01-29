@@ -1,0 +1,975 @@
+<template>
+
+   <p>accordion</p>
+   <lightning-card class="atitle" title="Products" style="font-weight: bold;">
+    <ul class="slds-accordion" style="font-weight: normal;">
+        <template for:each={products.data} for:item="p" key={p.Id}>
+        <li class="slds-accordion__list-item" key={p.Id} style="position: relative;">
+            <section class="slds-accordion__section" onclick={handleClickAccordion}>
+                <div class="slds-accordion__summary">
+                    <h2 class="slds-accordion__summary-heading">
+                        <button class="slds-button slds-button_reset slds-accordion__summary-action" aria-controls="referenceId-21" aria-expanded="true" title="Accordion summary">
+                            <!--<lightning-icon icon-name="utility:chevronright" size="x-small" class="slds-accordion__summary-action-icon slds-button__icon " aria-hidden="false"></lightning-icon>-->
+                            <lightning-icon icon-name="utility:chevrondown" size="x-small" class="slds-accordion__summary-action-icon slds-button__icon " aria-hidden="false"></lightning-icon>
+                            <lightning-icon icon-name="standard:product" alternative-text="Product" title="Product" style="margin-left: 8px; margin-right: 8px; size: 10px;"></lightning-icon>
+                            <span class="slds-accordion__summary-content" title="Section Title">{p.Name}
+                            </span>
+
+                            <lightning-button-menu slot="actions" key={p.Id}
+                            alternative-text="Show menu" 
+                            icon-size="x-small"
+                            menu-alignment="right"
+                            style="position:absolute; right:10px;"
+                            >
+                          <lightning-menu-item value="View"  key={p.Id} label="View"  data-val={p.Id} onclick={showDetailsModalBox2} name={p.Id} ></lightning-menu-item>
+                          <lightning-menu-item value="Edit"  key={p.Id} label="Edit"  onclick={handleEdit} name={p.Id} ></lightning-menu-item>
+                          <lightning-menu-item data-id={p.Id} value="Delete" key={p.Id}  label="Delete" onclick={handledelete} name={p.Id} ></lightning-menu-item>
+                          
+                      </lightning-button-menu>
+                        </button>
+                        </h2>
+                    </div>
+                    <div class="slds-accordion__content">
+                        <article class="slds-card">
+                            
+                            <div class="slds-card__body slds-card__body_inner">
+                                <!-- this part will have the user selected fields information,, add the configuration tag hre -->
+                                
+                                
+                                    
+                                <span key={p.Id} class="slds-truncate" title="Section Title" style="color: rgba(0, 112, 210, 1); font-size:15px;">
+                                        <p style="font-size: small; font-style: italic; color:black;">Product Code: {p.ProductCode}&ensp;&#8226;&ensp;Name: {p.Name}&ensp;&#8226;&ensp;Created By: {p.CreatedBy.Name}</p>
+                                </span>
+                                <lightning-formatted-rich-text key={p.Id} class="myclass" value={p.Product_Image__c} > 
+                                </lightning-formatted-rich-text>
+                                
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </li>
+            </template>
+        </ul>
+    
+</lightning-card>  
+                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+    <p>f11f</p>
+    <div style="background-color: white;">
+    
+        <template if:true={products.data}>
+            <div class="full-view">
+                <div class="left-bar">
+                    <template for:each={products.data} for:item="it3">
+                        <div key={it3.Id} > 
+                        <div key={it3.Id} data-id={it3.Id} data-val={it3.Id} onclick={handelShowResults} class="less-info">
+                            <div class="product-title"  > {it3.Name}</div>
+                            <div>
+                                <lightning-formatted-rich-text class="myclass" value={it3.Product_Image__c} > 
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </div>
+                            <!--problematic area:  
+                                 <div style="float:right">
+                                <img src={imagePath1} alt="edit" key={it3.Id}  onclick={showDetailsModalBox}  name={it3.Id} style="height:20px;width:20px;padding:2px;">
+                                <img src={imagePath2} alt="delete"  data-id={it3.Id}  key={it3.Id} onclick={handledelete}  style="height:20px;width:20px;padding:2px;">
+                            </div> -->
+                    </div> 
+                    </template>
+                </div>
+                <div class="right-bar">
+                    <div style="font-weight: bold;font-size:40px;text-align:center; background:orange">Results:</div>
+                    <template if:true={first}>
+                        <lightning-record-form
+                            record-id={first}
+                            object-api-name="Product2"
+                            layout-type="Full"
+                            columns="2"
+                            mode="readonly">
+                        </lightning-record-form>
+                    </template>
+                    <div>
+                        <p style="color:darkgray; font-style:italic;">Want to make changes?</p>
+                        <div >
+                            <img src={imagePath1} alt="edit" key={first}  onclick={showDetailsModalBox}  name={first} style="height:20px;width:20px;padding:2px;">
+                            <img src={imagePath2} alt="delete"  data-id={first}  key={first} onclick={handledelete}  style="height:20px;width:20px;padding:2px;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        </div>
+    
+    
+    
+     <!-- ################################# -->
+     
+     <template if:true={isDetailShowModal}>
+    
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <!-- modal header start -->
+          <header class="slds-modal__header">
+             <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox}>
+                <lightning-icon icon-name="utility:close"
+                   alternative-text="close"
+                   variant="inverse"
+                   size="small" ></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+             </button>
+             <h2  class="slds-text-heading_medium slds-hyphenate">Edit Product</h2>
+          </header>
+        
+          <!-- modal body start -->
+          
+          <div class="slds-modal__content slds-p-around_medium" >
+                <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+               <lightning-card>
+                    <p>Edit Details :</p>
+                    <lightning-record-form
+                        record-id={rid}
+                        object-api-name={objectApiName}
+                        layout-type="Full"
+                        mode="edit"
+                        columns="2"
+                        onsuccess={handleSuccess}
+
+                        >
+                    </lightning-record-form>
+                </lightning-card>      
+                
+          </div>
+          <!-- modal footer start-->
+          <footer class="slds-modal__footer">
+             <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox}>Cancel</button>
+          </footer>
+        
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <!-- modal end -->
+    
+        <!-- ################################# -->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <p>trrrrr</p>
+        <template if:true={products.data}>
+            <div class="full-view">
+                <div class="left-bar">
+                    <template for:each={products.data} for:item="it3">
+                        <div key={it3.Id} data-id={it3.Id} data-val={it3.Id} onclick={handelShowResults} class="less-info">
+                            <div class="product-title"  > {it3.Name}</div>
+                            <div>
+                                <lightning-formatted-rich-text class="myclass" value={it3.Product_Image__c} > 
+                                </lightning-formatted-rich-text>
+                            </div>
+                            <div style="float:right">
+                                <img src={imagePath1} alt="edit" key={it3.Id}  onclick={showDetailsModalBox}  name={it3.Id} style="height:20px;width:20px;padding:2px;">
+                                <img src={imagePath2} alt="delete"  data-id={it3.Id}  key={it3.Id} onclick={handledelete}  style="height:20px;width:20px;padding:2px;">
+                            </div>
+                        </div>    
+                    </template>
+                </div>
+                <div class="right-bar">
+                    <div style="font-weight: bold;font-size:40px;text-align:center; background:orange">Results:</div>
+                    <template if:true={first}>
+                        <lightning-record-form
+                            record-id={first}
+                            object-api-name="Product2"
+                            layout-type="Full"
+                            columns="2"
+                            mode="readonly">
+                        </lightning-record-form>
+                    </template>
+                </div>
+            </div>
+        </template>
+    
+    
+    
+     <!-- ################################# -->
+     <template if:true={isDetailShowModal}>
+    
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <!-- modal header start -->
+          <header class="slds-modal__header">
+             <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox}>
+                <lightning-icon icon-name="utility:close"
+                   alternative-text="close"
+                   variant="inverse"
+                   size="small" ></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+             </button>
+             <h2  class="slds-text-heading_medium slds-hyphenate">Edit Product</h2>
+          </header>
+        
+          <!-- modal body start -->
+          
+          <div class="slds-modal__content slds-p-around_medium" >
+                <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+               <lightning-card>
+                    <p>Edit Details :</p>
+                    <lightning-record-form
+                        record-id={rid}
+                        object-api-name={objectApiName}
+                        layout-type="Full"
+                        mode="edit"
+                        columns="2"
+                        onsuccess={handleSuccess}
+                        >
+                    </lightning-record-form>
+                </lightning-card>      
+                
+          </div>
+          <!-- modal footer start-->
+          <footer class="slds-modal__footer">
+             <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox}>Cancel</button>
+          </footer>
+        
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <!-- modal end -->
+    
+        <!-- ################################# -->
+    
+    
+    <p>e4444e</p>
+
+
+    <!-- <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+          </div>
+          <div class="flip-card-back">
+            <h1>John Doe</h1>
+            <p>Architect  Engineer</p>
+            <p>We love that guy</p>
+          </div>
+        </div>
+      </div>
+      -->
+  
+      <div class="slds-grid slds-wrap">
+            <template if:true={products.data}>
+                <template for:each={products.data} for:item="it4">
+                    <div key={it4.Id} class="flip-card slds-m-around_medium">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+
+                                <br>
+                                <div style="text-align: center;">
+                                    <lightning-formatted-rich-text value={it4.Product_Image__c} ></lightning-formatted-rich-text>
+                                </div>
+                                <div style="text-align: center;" > 
+                                    {it4.Name} 
+                                </div>                    
+                            </div>
+                          
+                            <div class="flip-card-back">
+                                <h1 style="text-decoration: underline; font-weight:700; text-align:center;">Details:   
+                                    <img src={imagePath1} alt="edit" key={it4.Id}  onclick={showDetailsModalBox}  name={it4.Id}  style="height:20px;width:20px;padding:2px;float:right;">
+                                    <img src={imagePath3} alt="big" key={it4.Id}  data-val={it4.Id} onclick={showDetailsModalBox2} style="height:20px;width:20px;padding:2px;float:right;">
+                                    </h1>
+                                   <p  key={it4.Id} title="ProductCode" style="width:100px;">Product Code: {it4.ProductCode} </p><br>
+                                    <p  key={it4.Id} title="Name" style="width:100px;">Name: {it4.Name} </p><br>
+                                    <p  key={it4.Id} title="CreatedById" style="width:100px;">Created By: {it4.CreatedBy.Name}  </p><br>
+                                    <img src={imagePath2} alt="delete"  data-id={it4.Id}  key={it4.Id} onclick={handledelete}  style="height:20px;width:20px;float:right;">
+
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>  
+        </div>
+
+        <!-- ################################# -->
+ <template if:true={isDetailShowModal}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+    <!-- modal header start -->
+      <header class="slds-modal__header">
+         <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox}>
+            <lightning-icon icon-name="utility:close"
+               alternative-text="close"
+               variant="inverse"
+               size="small" ></lightning-icon>
+            <span class="slds-assistive-text">Close</span>
+         </button>
+         <h2  class="slds-text-heading_medium slds-hyphenate">Edit Product</h2>
+      </header>
+    
+      <!-- modal body start -->
+      
+      <div class="slds-modal__content slds-p-around_medium" >
+            <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+           <lightning-card>
+                <p>Edit Details :</p>
+                <lightning-record-form
+                    record-id={rid}
+                    object-api-name={objectApiName}
+                    layout-type="Full"
+                    mode="edit"
+                    columns="2"
+                    onsuccess={handleSuccess}
+                    >
+                </lightning-record-form>
+            </lightning-card>      
+            
+      </div>
+      <!-- modal footer start-->
+      <footer class="slds-modal__footer">
+         <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox}>Cancel</button>
+      </footer>
+    
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- modal end -->
+
+    <!-- ################################# -->
+       <!-- ################################# -->
+
+   <!-- modal start -->      
+   <template if:true={isDetailviewModal}>
+
+    <!--
+        I Used SLDS for this code
+        Here is link https://www.lightningdesignsystem.com/components/modals/
+    --> 
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox2}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">View Product Details</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            <p>{pid}</p>
+            <lightning-record-form
+            record-id={pid}
+            object-api-name="Product2"
+            layout-type="Full"
+            mode="readonly"
+                > 
+                <!-- <lightning-input-field field-name="AccountId" value={x} ></lightning-input-field>
+                <lightning-input-field field-name="Name" ></lightning-input-field>
+                <lightning-input-field field-name="Phone"  ></lightning-input-field>
+                <lightning-input-field field-name="Email"  ></lightning-input-field>
+                <lightning-input-field field-name="Title"  ></lightning-input-field> -->
+
+                <!-- <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Save">
+                </lightning-button> -->
+
+
+            </lightning-record-form>
+        </lightning-card>      
+        
+  </div>
+
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox2}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<!-- <div class="slds-backdrop slds-backdrop_open"></div> -->
+</template>
+<!-- modal end -->
+<!-- ################################# -->
+ 
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div>
+        <p> My data In TILE:</p>
+        <div class="slds-p-around_medium lgc-bg">
+            <template if:true={products.data}>
+                <template for:each={products.data} for:item="it">
+                    <!-- <lightning-button key={it.Id} name={it.Id} label={it.Name} onclick={showDetailsModalBox2}></lightning-button> -->
+                    
+                    <!-- <lightning-tile key={it.Id} name={it.Id} label={it.Name} onclick={handleClick} href={x} style="background-color:lightblue; padding-left:15px; "> -->
+                        <lightning-tile key={it.Id} style="background-color:rgb(205, 232, 241); height:120px;"  >
+                            <div style="height:auto; display:inline-flex;">
+                            <div key={it.Id} title="Product_Image__c">
+                            
+                                <lightning-formatted-rich-text key={it.Id} class="myclass"
+                                value={it.Product_Image__c}  > </lightning-formatted-rich-text>
+                                </div>
+                        <!-- <ul class="slds-list_horizontal"> -->
+
+                            <div key={it.Id} style="margin:5px;">
+                            <p data-val={it.Id} onclick={showDetailsModalBox2} style="color:blue; float: left; display:inline;">{it.Name} </p><br>
+                            <ul class="slds-list_horizontal">
+                                <li  key={it.Id} title="ProductCode" ><p style="color: rgb(116, 112, 112);">Product Code:</p>  {it.ProductCode} </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <li  key={it.Id} title="Name" ><p style="color: rgb(116, 112, 112);">Name:</p>    {it.Name}</li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <li  key={it.Id} title="CreatedById" ><p style="color: rgb(116, 112, 112);">Created by:</p>   {it.CreatedBy.Name} </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </ul>
+                            </div>
+                            </div>
+                        <!-- </ul> -->
+                        <!-- <ul class="slds-list_horizontal">
+                            <li  key={it.Id} title="Name" style="width:100px;">Name: </li>
+                            <li  key={it.Id} title="Name" style="width:200px; padding-bottom:10px;">{it.Name} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it.Id} title="CreatedById" style="width:100px;">Created By: </li>
+                            <li  key={it.Id} title="CreatedById" style="width:200px; padding-bottom:10px;">{it.CreatedBy.Name} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it.Id} title="Product_Image__c" style="width:200px; padding-bottom:10px;">
+                                <lightning-formatted-rich-text key={it.Id} class="myclass"
+                                value={it.Product_Image__c} > </lightning-formatted-rich-text></li>
+                        </ul>  -->
+                        <div style="float:right">
+                            <img src={imagePath1} alt="edit" key={it.Id}  onclick={showDetailsModalBox} name={it.Id}  style="height:20px;width:20px;padding:2px;">
+                            <img src={imagePath2} alt="delete"  data-id={it.Id}  key={it.Id} onclick={handledelete}  style="height:20px;width:20px;padding:2px;">
+                        </div>
+                        
+            
+                     </lightning-tile> 
+
+                </template>
+                </template>
+                </div>
+                </div>
+                
+
+
+
+
+
+
+                     <!-- ################################# -->
+
+   <!-- modal start -->      
+   <template if:true={isDetailviewModal}>
+
+    <!--
+        I Used SLDS for this code
+        Here is link https://www.lightningdesignsystem.com/components/modals/
+    --> 
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox2}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">View Product Details</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            <p>{pid}</p>
+            <lightning-record-form
+            record-id={pid}
+            object-api-name="Product2"
+            layout-type="Full"
+            mode="readonly"
+                > 
+                <!-- <lightning-input-field field-name="AccountId" value={x} ></lightning-input-field>
+                <lightning-input-field field-name="Name" ></lightning-input-field>
+                <lightning-input-field field-name="Phone"  ></lightning-input-field>
+                <lightning-input-field field-name="Email"  ></lightning-input-field>
+                <lightning-input-field field-name="Title"  ></lightning-input-field> -->
+
+                <!-- <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Save">
+                </lightning-button> -->
+
+
+            </lightning-record-form>
+        </lightning-card>      
+        
+  </div>
+
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox2}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<!-- <div class="slds-backdrop slds-backdrop_open"></div> -->
+</template>
+<!-- modal end -->
+<!-- ################################# -->
+
+
+<!-- ################################# -->
+
+
+ <!-- ################################# -->
+ <template if:true={isDetailShowModal}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+    <!-- modal header start -->
+      <header class="slds-modal__header">
+         <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox}>
+            <lightning-icon icon-name="utility:close"
+               alternative-text="close"
+               variant="inverse"
+               size="small" ></lightning-icon>
+            <span class="slds-assistive-text">Close</span>
+         </button>
+         <h2  class="slds-text-heading_medium slds-hyphenate">Edit Product</h2>
+      </header>
+    
+      <!-- modal body start -->
+      
+      <div class="slds-modal__content slds-p-around_medium" >
+            <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+           <lightning-card>
+                <p>Edit Details :</p>
+                <lightning-record-form
+                    record-id={rid}
+                    object-api-name={objectApiName}
+                    layout-type="Full"
+                    mode="edit"
+                    columns="2"
+                    onsuccess={handleSuccess}
+                    >
+                </lightning-record-form>
+            </lightning-card>      
+            
+      </div>
+      <!-- modal footer start-->
+      <footer class="slds-modal__footer">
+         <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox}>Cancel</button>
+      </footer>
+    
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- modal end -->
+
+    <!-- ################################# -->
+
+
+
+
+    <p>This add button is used for all views...</p>
+    <lightning-button variant="brand" label="Add Product" title="Add Popup" onclick={showModalBox} 
+    style="float:center;" ></lightning-button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div>
+        <p> My data In CARD::</p>
+            <template if:true={products.data}>
+                <div class="slds-grid slds-wrap" style="height: auto; width:auto; margin:10px;padding:10px;">
+                <template for:each={products.data} for:item="it2">
+                    <div key={it2.Id} class="slds-size_1-of-3" style="height: auto; width:auto;margin:10px;padding:10px;">
+                    <lightning-card  variant="Narrow"  title={it2.Name} icon-name="standard:account" key={it2.Id} 
+                                name={it2.Id} label={it2.Name} style="padding-left:10px;">
+                                <!-- onclick={handleClick2} href={x} -->
+                                <lightning-button-menu slot="actions" key={it2.Id}
+                                alternative-text="Show menu" 
+                                icon-size="x-small"
+                                menu-alignment="right">
+                              <lightning-menu-item value="View"  key={it2.Id} label="View"  data-val={it2.Id} onclick={showDetailsModalBox2} name={it2.Id} ></lightning-menu-item>
+                              <lightning-menu-item value="Edit"  key={it2.Id} label="Edit"  onclick={showDetailsModalBox} name={it2.Id} ></lightning-menu-item>
+                              <lightning-menu-item data-id={it2.Id} value="Delete" key={it2.Id}  label="Delete" onclick={handledelete} name={it2.Id} ></lightning-menu-item>
+                              
+                          </lightning-button-menu>
+
+                        <div style="padding-left:10px;">
+                    
+                        <ul class="slds-list_horizontal">
+                            <li  key={it2.Id} title="ProductCode" style="width:100px;">Product Code: </li>
+                            <li  key={it2.Id} title="ProductCode" style="width:200px; padding-bottom:10px;">{it2.ProductCode} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it2.Id} title="Name" style="width:100px;">Name: </li>
+                            <li  key={it2.Id} title="Name" style="width:200px; padding-bottom:10px;">{it2.Name} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it2.Id} title="CreatedById" style="width:100px;">Created By: </li>
+                            <li  key={it2.Id} title="CreatedById" style="width:200px; padding-bottom:10px;">{it2.CreatedBy.Name} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <div >
+                            <!-- <li  key={it2.Id} title="Product_Image__c" style="width:200px; padding-bottom:10px;"><lightning-formatted-rich-text class="myclass" key={it2.Id} 
+                                value={it2.Product_Image__c} > </lightning-formatted-rich-text></li> -->
+
+                                <li  key={it2.Id} title="Product_Image__c" style="width:200px; padding-bottom:10px;"><lightning-formatted-rich-text key={it2.Id} class="myclass"
+                                    value={it2.Product_Image__c} > </lightning-formatted-rich-text></li>
+                            </div>
+                        </ul>
+                    </div>
+                        <lightning-button label="More..." key={it2.Id} style="float:right;" onclick={handleClick2} name={it2.Id}></lightning-button>
+                      
+                        <p slot="footer" key={it2.Id}> 
+                        </p>
+
+
+
+                        <!-- ################################# -->
+                        <template if:true={isDetailShowModal}>
+
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                            <!-- modal header start -->
+                              <header class="slds-modal__header">
+                                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox}>
+                                    <lightning-icon icon-name="utility:close"
+                                       alternative-text="close"
+                                       variant="inverse"
+                                       size="small" ></lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                 </button>
+                                 <h2  class="slds-text-heading_medium slds-hyphenate">Edit Product</h2>
+                              </header>
+                            
+                              <!-- modal body start -->
+                              
+                              <div class="slds-modal__content slds-p-around_medium" >
+                                    <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+                                   <lightning-card>
+                                        <p>Edit Details :</p>
+                                        <lightning-record-form
+                                            record-id={rid}
+                                            object-api-name={objectApiName}
+                                            layout-type="Full"
+                                            mode="edit"
+                                            columns="2"
+                                            onsuccess={handleSuccess}
+                                            >
+                                        </lightning-record-form>
+                                    </lightning-card>      
+                                    
+                              </div>
+                              <!-- modal footer start-->
+                              <footer class="slds-modal__footer">
+                                 <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox}>Cancel</button>
+                              </footer>
+                            
+                            </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                            </template>
+                            <!-- modal end -->
+
+                            <!-- ################################# -->
+
+
+<!-- ################################# -->
+
+   <!-- modal start -->      
+   <template if:true={isShowModal}>
+
+    <!--
+        I Used SLDS for this code
+        Here is link https://www.lightningdesignsystem.com/components/modals/
+    --> 
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">Add Product</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            
+            <lightning-record-form
+                object-api-name={objectApiName}
+                layout-type="Full"
+                
+                onsuccess={handleSuccess}
+                >
+                <!-- <lightning-input-field field-name="AccountId" value={x} ></lightning-input-field>
+                <lightning-input-field field-name="Name" ></lightning-input-field>
+                <lightning-input-field field-name="Phone"  ></lightning-input-field>
+                <lightning-input-field field-name="Email"  ></lightning-input-field>
+                <lightning-input-field field-name="Title"  ></lightning-input-field> -->
+
+                <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Save">
+                </lightning-button>
+
+
+            </lightning-record-form>
+        </lightning-card>      
+        
+  </div>
+
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+<!-- modal end -->
+<!-- ################################# -->
+
+
+
+
+
+ <!-- ################################# -->
+
+   <!-- modal start -->      
+   <template if:true={isDetailviewModal}>
+
+    <!--
+        I Used SLDS for this code
+        Here is link https://www.lightningdesignsystem.com/components/modals/
+    --> 
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox2}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">View Product Details</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            <p>{pid}</p>
+            <lightning-record-form
+            record-id={pid}
+            object-api-name="Product2"
+            layout-type="Full"
+            mode="readonly"
+                > 
+                <!-- <lightning-input-field field-name="AccountId" value={x} ></lightning-input-field>
+                <lightning-input-field field-name="Name" ></lightning-input-field>
+                <lightning-input-field field-name="Phone"  ></lightning-input-field>
+                <lightning-input-field field-name="Email"  ></lightning-input-field>
+                <lightning-input-field field-name="Title"  ></lightning-input-field> -->
+
+                <!-- <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Save">
+                </lightning-button> -->
+
+
+            </lightning-record-form>
+        </lightning-card>      
+        
+  </div>
+
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox2}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<!-- <div class="slds-backdrop slds-backdrop_open"></div> -->
+</template>
+<!-- modal end -->
+<!-- ################################# -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </lightning-card>
+                        </div>
+                        
+    
+                    </template>
+                </div>
+            </template>
+        </div>
+
+
+
+</template>
