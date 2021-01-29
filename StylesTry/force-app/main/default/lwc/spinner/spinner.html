@@ -1,0 +1,66 @@
+<template>
+    <template if:true={showOne}>
+        <lightning-spinner class="loader" size="medium" variant="brand" data-text="Loading..."><p>dffrfr</p></lightning-spinner>
+        <div class="cover">
+            <img src="https://einsteinreadiness.salesforce.com/javax.faces.resource/images/einstein2.png.xhtml" height="20" width="250"/>
+            <lightning-spinner class="loader" size="medium" variant="brand" data-text="Loading..."></lightning-spinner>
+
+        </div>
+    </template>
+    <lightning-card title="Reusable Spinner 9">
+        <lightning-button label="Spinner" variant="brand" onclick={spinnerHandler} name="showOne"></lightning-button>
+        <p>Some text 1</p>
+        <p>Some text 1</p>
+        <p>Some text 1</p>
+        <p>Some text 1</p>
+        <p>Some text 1</p> 
+        <!-- <template if:true={showOne}>
+            <c-lightning-loader
+            spinner-text="Loading"
+            size="medium"
+            variant="brand"
+            ></c-lightning-loader>
+        </template> -->
+         
+        
+    </lightning-card>
+
+
+
+    <!-- spinner -->
+
+    <p> My data:::</p>
+
+    <!-- code for fetching data -->
+    <div class="slds-p-around_medium lgc-bg">
+        <template for:each={accounts} for:item="it">
+                <p key={it.Id}>{it.Name}</p>
+            </template>
+    </div>
+
+
+     <!-- every button used for loading data should have a loading spinner as follows -->
+    <lightning-button label="get Accounts" onclick={getAccounts}></lightning-button>
+    <template if:true={loading}>
+        <div class="cover">
+            <img src="https://einsteinreadiness.salesforce.com/javax.faces.resource/images/einstein2.png.xhtml" height="20" width="350"/>
+            <lightning-spinner class="loader" size="medium" variant="brand" data-text="Loading..."></lightning-spinner>
+        </div>
+    </template>
+
+    <div class="astroboy">
+
+    </div> 
+    <div class="ani-cont">
+        <!-- <div class="ani"> -->
+        <!-- <div class="runner"></div> -->
+        <div class="road"></div>
+        <div class="door">
+            <img src="https://www.svgrepo.com/show/151987/opened-door-aperture.svg"/>
+        </div>
+        </div> 
+        
+    </div> 
+   
+    
+</template>

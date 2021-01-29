@@ -1,0 +1,181 @@
+
+<template>
+   
+    <lightning-card title="Account-Contact Summary Tool" style="font-weight: bolder;">
+        <p style="padding-left: 10px;">Enter Account Name:</p>
+      
+        <lightning-input type="search" onchange={handleChange} variant="label-hidden" class="slds-var-m-bottom_small" label="Search" value={accountname} style="padding: 10px;">
+            
+        </lightning-input>
+    </lightning-card>
+    <br>
+
+    <p style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight:bold;background-color: rgb(39, 129, 39); color:white; font-size:20px;padding:3px;">ACCOUNTS</p>
+    <br>
+    <p class="slds-text-heading_small" style="background-color: rgb(39, 129, 39); color:yellow;padding:3px;">Selected {activeSectionMessage}</p>
+    
+       
+    <lightning-card style="background:darkseagreen;" >
+        <template if:true={accounts.data}>
+            <lightning-accordion style="background:darkseagreen;" class="example-accordion" 
+                         onsectiontoggle={handleToggleSection1}>
+
+            <template for:each={accounts.data} for:item="it">
+
+                    <lightning-accordion-section onclick={showContact}   name={it.Name} key={it.Id} label={it.Name}>
+                            <lightning-button-menu slot="actions" key={it.Id}
+                                  alternative-text="Show menu" 
+                                  icon-size="x-small"
+                                  menu-alignment="right" style="background: skyblue ; font-family:Georgia, 'Times New Roman', Times, serif; font-weight:700; " >
+                                <lightning-menu-item value="New"  key={it.Id} label="Menu Item One"></lightning-menu-item>
+                                <lightning-menu-item value="Edit" key={it.Id}  label="Menu Item Two"></lightning-menu-item>
+                                
+                            </lightning-button-menu>
+                        
+                                
+                            <lightning-card style="background:honeydew ;">
+                                      
+                                <p style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight:500; background:honeydew ;font-size:15px;;padding:5px;font-style:italic; margin-top:-5px;">Related Contacts</p>
+                                <template for:each={it.Contacts} for:item="con">
+                                    
+                                    <div style="font-size: 15px;background-color:honeydew" key={con.Id} >
+                                        
+                                        <lightning-tile style="background-color:honeydew;margin:4px; padding:2px; border:1px solid black; border-radius : 8px; " class="quant" label={con.Name} key={con.Id}>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <lightning-button name={con.Id} key={con.Id} variant="success" label="Edit" onclick={showDetailsModalBox} style="float:right;"></lightning-button>
+                                        <lightning-icon icon-name="action:new_note" alternative-text="New note" title="New note"></lightning-icon>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Name:&nbsp;{con.Name}&nbsp;.&nbsp;Title:&nbsp;{con.Title}&nbsp;.&nbsp;Email:&nbsp;{con.Email}&nbsp;.&nbsp;Phone:&nbsp; {con.Phone}&nbsp;.&nbsp;
+                                    </lightning-tile>
+                                    </div>
+                                    
+                                </template>
+                                    <!-- <lightning-button  variant="brand" label="Add Contact" value={it.Id} style="float:right;" onclick={handleaddcontact}></lightning-button> -->
+                                    <lightning-button name={it.Name} variant="brand" label="Add Contact" title="Add Popup" onclick={showModalBox} value={it.Id} key={it.Id} style="float:right;" data-id={it.Id}></lightning-button>
+
+
+<!-- ################################# -->
+
+   <!-- modal start -->      
+   <template if:true={isShowModal}>
+
+    <!--
+        I Used SLDS for this code
+        Here is link https://www.lightningdesignsystem.com/components/modals/
+    --> 
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">Add Contact</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            <p>Account Name: {x}</p>
+            <lightning-record-edit-form
+                object-api-name={objectApiName}
+                layout-type="full"
+                mode="edit"
+                onsuccess={handleSuccess}
+                >
+                <lightning-input-field field-name="AccountId" value={x} ></lightning-input-field>
+                <lightning-input-field field-name="Name" ></lightning-input-field>
+                <lightning-input-field field-name="Phone"  ></lightning-input-field>
+                <lightning-input-field field-name="Email"  ></lightning-input-field>
+                <lightning-input-field field-name="Title"  ></lightning-input-field>
+
+                <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Save">
+                </lightning-button>
+
+
+            </lightning-record-edit-form>
+        </lightning-card>      
+        
+  </div>
+
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+<!-- modal end -->
+
+<template if:true={isDetailShowModal}>
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideDetailModalBox}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">Edit Contact</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            <p>Edit Details :</p>
+            <lightning-record-form
+                record-id={rid}
+                object-api-name={objectApiName}
+                layout-type="Compact"
+                mode="edit"
+                columns="2"
+                onsuccess={handleSuccess}
+                >
+            </lightning-record-form>
+        </lightning-card>      
+        
+  </div>
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideDetailModalBox}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+<!-- modal end -->
+<!-- ############# -->
+                            </lightning-card> 
+                        
+                        </lightning-accordion-section>
+                       
+                        <p key={it.Id} style="font-weight: 400; font-size:medium;">&nbsp;&nbsp;&nbsp;&nbsp;<lightning-icon icon-name="standard:account" alternative-text="Account" title="Account" key={it.Id}></lightning-icon>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Type:&nbsp;{it.Type}&nbsp;- - &nbsp;Phone:&nbsp;{it.Phone}&nbsp;- - &nbsp; Rating:&nbsp; {it.Rating}&nbsp;&nbsp;<lightning-formatted-rich-text key={it.Id} 
+                            value={it.Rating_Icon__c} > </lightning-formatted-rich-text></p>
+                            
+                        
+            </template> 
+        </lightning-accordion>
+     
+    </template>
+</lightning-card>
+
+</template>

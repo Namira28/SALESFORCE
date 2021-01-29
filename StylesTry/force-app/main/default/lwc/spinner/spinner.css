@@ -1,0 +1,98 @@
+.loader::after{
+    position:absolute;
+    content:attr(data-text);
+    width:100%;
+    text-align:center;
+    font-weight:bold;
+    top: calc(50% + 1.5rem);
+    color:grey;
+}
+
+.cover{
+    
+    position: absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px; 
+    display:flex;
+    justify-content:center;
+    background: rgba(255,255,255,0.8);
+    z-index:10;
+}
+
+
+.astroboy {
+    display: block;
+    width: 80vw;
+    height: 20vh;
+    background: url('https://pbs.twimg.com/media/DoMxVnpUwAAxbLo.png') left center;
+    animation: astroboy 0.8s steps(20) infinite;
+}
+
+    .astroboy:hover {
+        animation-play-state: paused;
+    }
+
+@keyframes astroboy {
+
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -3025px;
+    }
+}
+
+
+
+.road{
+    border-bottom: 7px dashed black;
+    width: 85%;
+    }
+    .runner{
+    
+    background: url("https://webisora.com/wp-content/uploads/2018/07/capguy-walk-1472.png") no-repeat;
+    width: 185px;
+    height: 317px;
+    z-index:9;
+    animation: walk 1.2s steps(8) infinite,
+    forward 5s linear infinite;
+    }
+    
+    @keyframes walk{
+    0%{
+    background-position: 0px;
+    }
+    100%{
+    background-position: -1472px;
+    }
+    }
+    @keyframes forward{
+    0%{
+    transform: translateX(-100px);
+    }
+    100%{
+    transform: translateX(1200px);
+    }
+    }
+    .ani{
+        width:60%;
+        /* overflow:hidden; */
+        display:flex;
+        justify-content: flex-start;
+        /* background:orange; */
+    }
+
+    .door{
+        width: 40%;
+        margin-left: -202px;
+        
+        /* margin-top: -110px; */
+    }
+
+    .door img{
+        height: 350px;
+
+    }

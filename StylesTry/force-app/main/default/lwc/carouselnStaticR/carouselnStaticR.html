@@ -1,0 +1,131 @@
+<template>
+    <lightning-card title="Access a Static resource stored in org in png format.---">
+        <div>
+            <img src={imagePath1} alt="hot" style="height:100px;width:100px;"><br>
+            <img src={imagePath2} alt="warm" style="height:100px;width:100px;"><br>
+            <img src={imagePath3} alt="cold" style="height:100px;width:100px;"><br>
+            
+        </div>
+    </lightning-card>
+    
+
+        <lightning-carousel disable-auto-scroll>
+            <lightning-carousel-image
+                src="data:image/jpeg;base64,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"
+                header="First card"
+                description="First card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+                src="https://i0.wp.com/cdnssl.ubergizmo.com/wp-content/uploads/2013/01/tr2-640x312.jpg"
+                header="Second card"
+                description="Second card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+                src="https://2.bp.blogspot.com/-aP8LAxLMPao/TthLgShy1lI/AAAAAAAAAJ0/qKbqMF-dV4g/s1600/Bag-It-640x312.jpg"
+                header="Third card"
+                description="Third card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+        </lightning-carousel>
+  
+
+        <div class="slds-size_3-of-4">
+        <lightning-carousel disable-auto-scroll>
+            <lightning-carousel-image
+                src={imagePath1}
+                header="First card"
+                description="First card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+            src={imagePath2}              
+              header="Second card"
+                description="Second card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+            src={imagePath3}    
+                        header="Third card"
+                description="Third card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+        
+         <lightning-carousel-image
+                src={imagePath1}
+                header="First card"
+                description="First card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+                src={imagePath2}              
+                header="Second card"
+                description="Second card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+                src={imagePath3}    
+                header="Third card"
+                description="Third card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+                src={imagePath1}
+                header="First card"
+                description="First card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+            src={imagePath2}              
+              header="Second card"
+                description="Second card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+            <lightning-carousel-image
+            src={imagePath3}    
+                        header="Third card"
+                description="Third card description"
+                alternative-text="This is a card"
+                href="https://www.example.com">
+            </lightning-carousel-image>
+
+            <lightning-carousel-image
+            src={imagePath1}
+            header="First card"
+            description="First card description"
+            alternative-text="This is a card"
+            href="https://www.example.com">
+        </lightning-carousel-image>
+        <lightning-carousel-image
+        src={imagePath2}              
+          header="Second card"
+            description="Second card description"
+            alternative-text="This is a card"
+            href="https://www.example.com">
+        </lightning-carousel-image>
+        <lightning-carousel-image
+        src={imagePath3}    
+                    header="Third card"
+            description="Third card description"
+            alternative-text="This is a card"
+            href="https://www.example.com">
+        </lightning-carousel-image>
+           
+        
+        </lightning-carousel>
+    </div>
+    
+    
+</template>

@@ -1,0 +1,22 @@
+.loader::after{
+    position:absolute;
+    content:attr(data-text);
+    width:100%;
+    text-align:center;
+    font-weight:bold;
+    top: calc(50% + 1.5rem);
+    color:grey;
+}
+
+.cover{
+    
+    position: absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px; 
+    display:flex;
+    justify-content:center;
+    background: rgba(255,255,255,0.8);
+    z-index:10;
+}

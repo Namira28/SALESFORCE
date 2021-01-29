@@ -1,0 +1,146 @@
+<template>
+    <div>
+        <p> My data In TILE:</p>
+        <div class="slds-p-around_medium lgc-bg">
+            <template if:true={accounts.data}>
+                <template for:each={accounts.data} for:item="it">
+                    
+                    <lightning-tile key={it.Id} name={it.Id} label={it.Name} onclick={handleClick} href={x} style="background-color:lightblue;">
+                        
+                        <ul class="slds-list_horizontal">
+                            <li  key={it.Id} title="Type" style="width:60px;">Type: </li>
+                            <li  key={it.Id} title="Type" style="width:200px; padding-bottom:10px;">{it.Type} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it.Id} title="Phone" style="width:60px;">Phone: </li>
+                            <li  key={it.Id} title="Phone" style="width:200px; padding-bottom:10px;">{it.Phone} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it.Id} title="Rating" style="width:60px;">Rating: </li>
+                            <li  key={it.Id} title="Rating" style="width:200px; padding-bottom:10px;">{it.Rating} </li>
+                        </ul>
+                        
+            
+                    </lightning-tile>
+
+
+                </template>
+            </template>
+
+        </div>
+    </div>
+
+    <!-- ################################# -->
+
+
+    <div>
+        <p> My data In CARD:::</p>
+            <template if:true={accounts.data}>
+                <div class="slds-grid slds-wrap" style="height: 250px; width:auto; margin:10px;padding:10px;">
+                <template for:each={accounts.data} for:item="it2">
+                    <div key={it2.Id} class="slds-size_1-of-3" style="height: 250px; width:400px;margin:10px;padding:10px;">
+                    <lightning-card  variant="Narrow"  title={it2.Name} icon-name="standard:account" key={it2.Id} 
+                                name={it2.Id} label={it2.Name} onclick={handleClick2} href={x}>
+                        <lightning-button-icon  icon-name="utility:down" variant="border-filled" alternative-text="Show More" slot="actions" key={it2.Id}>
+                        </lightning-button-icon>
+                    
+                        <ul class="slds-list_horizontal">
+                            <li  key={it2.Id} title="Type" style="width:60px;padding-left:10px;">Type: </li>
+                            <li  key={it2.Id} title="Type" style="width:200px; padding-bottom:10px;">{it2.Type} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it2.Id} title="Phone" style="width:60px;padding-left:10px;">Phone: </li>
+                            <li  key={it2.Id} title="Phone" style="width:200px; padding-bottom:10px;">{it2.Phone} </li>
+                        </ul>
+                        <ul class="slds-list_horizontal">
+                            <li  key={it2.Id} title="Rating" style="width:60px;padding-left:10px;">Rating: </li>
+                            <li  key={it2.Id} title="Rating" style="width:200px; padding-bottom:10px;">{it2.Rating} </li>
+                        </ul>
+                        <!-- <lightning-button label="More..." key={it2.Id} style="float:right;" onclick={handleClick2} name={it2.Id}></lightning-button> -->
+                        <!-- <p slot="footer" key={it2.Id}>Add Contact</p> -->
+                        <!-- <p slot="footer" key={it2.Id}> -->
+                        
+                        <footer style="border-top:1px; background-color:white">
+                            <div slot="actions">
+                                <lightning-button name={it2.Name} variant="brand" label="Add Contact" title="Add Popup" onclick={showModalBox} value={it2.Id} key={it2.Id} style="float:right;" data-id={it2.Id}></lightning-button>
+                               </div>
+                            <lightning-button label="More..." key={it2.Id} style="float:right;" onclick={handleClick2} name={it2.Id}></lightning-button>
+
+                        </footer>
+                        <!-- </p> -->
+
+<!-- ################################# -->
+
+   <!-- modal start -->      
+   <template if:true={isShowModal}>
+
+    <!--
+        I Used SLDS for this code
+        Here is link https://www.lightningdesignsystem.com/components/modals/
+    --> 
+
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<!-- modal header start -->
+  <header class="slds-modal__header">
+     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+        <lightning-icon icon-name="utility:close"
+           alternative-text="close"
+           variant="inverse"
+           size="small" ></lightning-icon>
+        <span class="slds-assistive-text">Close</span>
+     </button>
+     <h2  class="slds-text-heading_medium slds-hyphenate">Add Contact</h2>
+  </header>
+
+  <!-- modal body start -->
+  
+  <div class="slds-modal__content slds-p-around_medium" >
+        <!-- <p>Modal/Popup in Lightning Web Component (LWC) Demo</p> -->
+       <lightning-card>
+            <p>Account Name: {y}</p>
+            <lightning-record-edit-form
+                object-api-name={objectApiName}
+                layout-type="full"
+                mode="edit"
+                onsuccess={handleSuccess}
+                >
+                <lightning-input-field field-name="AccountId" value={y} ></lightning-input-field>
+                <lightning-input-field field-name="Name" ></lightning-input-field>
+                <lightning-input-field field-name="Phone"  ></lightning-input-field>
+                <lightning-input-field field-name="Email"  ></lightning-input-field>
+                <lightning-input-field field-name="Title"  ></lightning-input-field>
+
+                <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Save">
+                </lightning-button>
+
+
+            </lightning-record-edit-form>
+        </lightning-card>      
+        
+  </div>
+
+  <!-- modal footer start-->
+  <footer class="slds-modal__footer">
+     <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+  </footer>
+
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+<!-- modal end -->
+                    </lightning-card>
+                    </div>
+                </template>
+                </div>
+            </template>
+       
+    </div>
+
+
+    
+</template>

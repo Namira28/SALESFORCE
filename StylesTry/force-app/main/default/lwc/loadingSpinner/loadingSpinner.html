@@ -1,0 +1,23 @@
+<template>
+     <!-- spinner -->
+
+     <p> My data:::</p>
+
+     <!-- code for fetching data -->
+     <div class="slds-p-around_medium lgc-bg">
+         <template for:each={accounts} for:item="it">
+                 <p key={it.Id}>{it.Name}</p>
+             </template>
+     </div>
+ 
+ 
+      <!-- every button used for loading data should have a loading spinner as follows -->
+     <lightning-button label="get Accounts" onclick={getAccounts}></lightning-button>
+     <template if:true={loading}>
+         <div class="cover">
+             <img src="https://einsteinreadiness.salesforce.com/javax.faces.resource/images/einstein2.png.xhtml" height="20" width="500"/>
+             <lightning-spinner class="loader" size="medium" variant="brand" data-text="Loading..."></lightning-spinner>
+         </div>
+     </template>
+    
+</template>

@@ -1,0 +1,76 @@
+
+<template>
+    <p class="slds-text-heading_small">{activeSectionMessage}</p>
+    
+    <!-- SHOW ACCOUNTS FIRST -->
+    <p>ACCOUNTS LIST :: ggggggj </p>
+    <p  >This is the content area for section AAA d</p>
+        <template if:true={accounts.data}>
+            <p>This is the content area for section AAA </p>
+
+            <lightning-accordion class="example-accordion" 
+                         onsectiontoggle={handleToggleSection}>
+            <template for:each={accounts.data} for:item="it">
+            
+                    <lightning-accordion-section name={it.Name} key={it.id} label={it.Name}>
+                            <lightning-button-menu slot="actions" key={it.id}
+                                  alternative-text="Show menu" 
+                                  icon-size="x-small"
+                                  menu-alignment="right" >
+                                <!-- <lightning-menu-item value="New"  key={it.id} label="Menu Item One"></lightning-menu-item>
+                                <lightning-menu-item value="Edit" key={it.id}  label="Menu Item Two"></lightning-menu-item> -->
+                                
+                            </lightning-button-menu>
+                            <p  >This is the content area for section AAA </p>
+                            <p  >This is the content area for section B</p>
+                                <p>dds</p>
+                            <lightning-card>
+                                <p>heolll</p>
+                                
+                               <!-- 
+                                   <template for:each={it.Contacts} for:item="i1">
+                                    <p key={i1.Id}>{i1.Name}</p>
+                                </template>
+                            -->
+                                <!-- <template if:true={account.data.}>
+                                    <p>Contacts data true!1genne11!!</p> -->
+                                    
+                                    <!-- <p>data={contacts.data}</p> -->
+                                    <!-- <lightning-datatable
+                                        key-field="AccountId"
+                                        data={contacts.data}
+                                        columns={columnsC}        
+                                    >
+                                   </lightning-datatable>
+                                </template>
+                                <template if:true={errors}>
+                                    <p>{errors}</p>
+                                </template> -->
+                            </lightning-card>
+                            <!-- <p key={it.value.id} > &nbsp;&nbsp;&nbsp;&nbsp;Type:&nbsp;{it.value.Type}&nbsp;.&nbsp;Phone:&nbsp;{it.value.Phone}&nbsp;.&nbsp; Rating:&nbsp; {it.value.Rating}&nbsp;.&nbsp; </p> -->
+                        
+                        </lightning-accordion-section>
+                        <p key={it.value.Id} > &nbsp;&nbsp;&nbsp;&nbsp;Type:&nbsp;{it.value.Type}&nbsp;.&nbsp;Phone:&nbsp;{it.value.Phone}&nbsp;.&nbsp; Rating:&nbsp; {it.value.Rating}&nbsp;.&nbsp; </p>
+                        
+            </template> 
+        </lightning-accordion>
+     
+    </template>
+
+
+<!-- 
+    <p>MY CONTACTS</p>
+    <lightning-card>
+        <template if:true={contacts.data}>
+            <lightning-datatable
+                key-field="Id"
+                data={contacts.data}
+                columns={columns}        
+            >
+           </lightning-datatable>
+        </template>
+        <template if:true={errors}>
+            <p>{errors}</p>
+        </template>
+    </lightning-card> -->
+</template>

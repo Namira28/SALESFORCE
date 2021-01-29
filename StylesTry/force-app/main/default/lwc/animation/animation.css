@@ -1,0 +1,256 @@
+/* .action1{
+    background: url("https://res.cloudinary.com/hy4kyit2a/f_auto,fl_lossy,q_70/learn/trails/get_smart_einstein/3456625465d825edc4d42e1ad6d828a3_icon.png");
+
+    animation: einstein 3s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes einstein{
+    0%{
+        background: url("https://res.cloudinary.com/hy4kyit2a/f_auto,fl_lossy,q_70/learn/trails/get_smart_einstein/3456625465d825edc4d42e1ad6d828a3_icon.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    38%{
+        background: url("https://sponsorsf.com/static/1a526a19588d75bca4d918c9c01dc0df/fef45/salesforce-einstein-character.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    73%{
+        background:url("https://res.cloudinary.com/hy4kyit2a/f_auto,fl_lossy,q_70/learn/modules/ai_sales/61fdda4aaca0e0ad2cb28db545a0514a_badge.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+} */
+
+
+.actionastro{
+    background: url("https://i.ibb.co/DKJYwVT/a1.png");
+
+    animation: astro 0.75s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes astro{
+    0%{
+        background: url("https://i.ibb.co/DKJYwVT/a1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    38%{
+        background: url("https://i.ibb.co/7y2nQc5/a2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    73%{
+        background:url("https://i.ibb.co/F6M0HNt/a3.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+}
+
+
+
+
+.actionbear{
+    background: url("https://i.ibb.co/QnjyJrj/b1.png");
+
+    animation: bear 1s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes bear{
+    14%{
+        background: url("https://i.ibb.co/QnjyJrj/b1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    28%{
+        background: url("https://i.ibb.co/FxcG1qx/b2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    42%{
+        background:url("https://i.ibb.co/rFckbTt/b3.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    64%{
+        background:url("https://i.ibb.co/vXDQMVk/b4.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    75%{
+        background:url("https://i.ibb.co/jHHX54X/b5.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    89%{
+        background:url("https://i.ibb.co/2MFZpPJ/b6.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+}
+
+
+
+.actionman{
+    background: url("https://i.ibb.co/25mCBcJ/m1.png");
+
+    animation: man 0.8s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes man{
+    0%{
+        background: url("https://i.ibb.co/25mCBcJ/m1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    50%{
+        background: url("https://i.ibb.co/4VwhSjn/m2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+   
+}
+
+
+
+
+.actioncat{
+    background: url("https://i.ibb.co/BsWtjCr/c1.png");
+
+    animation: cat 0.8s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes cat{
+    0%{
+        background: url("https://i.ibb.co/BsWtjCr/c1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    38%{
+        background: url("https://i.ibb.co/my5rtFW/c2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    73%{
+        background:url("https://i.ibb.co/L6dvQ86/c3.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+}
+
+
+
+.actiondog{
+    background: url("https://i.ibb.co/bN6nQhs/d1.png");
+
+    animation: dog 1.3s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes dog{
+    0%{
+        background: url("https://i.ibb.co/bN6nQhs/d1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    50%{
+        background: url("https://i.ibb.co/FWcZrP3/d2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    
+}
+
+.actionelephant{
+    background: url("https://i.ibb.co/DKG5t6D/f1.png");
+
+    animation: elephant 1s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes elephant{
+    0%{
+        background: url("https://i.ibb.co/DKG5t6D/f1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    50%{
+        background: url("https://i.ibb.co/9vRdhz8/f2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    
+}
+
+.actiondonkey{
+    background: url("https://i.ibb.co/JsKT38y/g1.png");
+
+    animation: donkey 0.6s  infinite ease;
+    height: 40vh;
+    width: 40vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+}
+@keyframes donkey{
+    0%{
+        background: url("https://i.ibb.co/JsKT38y/g1.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    50%{
+        background: url("https://i.ibb.co/55S1pbN/g2.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+    
+}
