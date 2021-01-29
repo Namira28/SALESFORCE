@@ -1,0 +1,349 @@
+.full-view{
+  display: flex;
+  justify-content: space-around;
+}
+.less-info{
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 0px 0px 0px 20px;
+  margin:10px;
+  border-radius: 13px;
+  font-size:15px;
+  cursor:pointer;
+}
+.less-info:hover{
+  transform: scale(1.1);
+}
+.left-bar{
+  /* border: 2px solid black; */
+  width: 28%;
+  display:flex;
+  flex-direction: column;
+  height: auto;
+}
+.right-bar{
+  position:sticky;
+  top:13vh;
+  width: 60%;
+  height: max-content;
+}
+
+.active{
+  border: 0.5px solid rgb(44, 44, 44);
+  /* transform: scale(1.1); */
+}
+
+
+
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 280px;
+  height: auto;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color:  rgb(255, 255, 255);
+  
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: rgba(214, 214, 214, 0.911);
+  
+  transform: rotateY(180deg);
+  padding-left:10px;
+  padding-top:5px;
+}
+
+.addproduct{
+margin-left:20px;
+margin-top:-20px;
+}
+
+
+
+
+
+  /* For animations */
+
+
+.actionastro{
+  background: url("https://i.ibb.co/DKJYwVT/a1.png");
+
+  animation: astro 0.75s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes astro{
+  0%{
+      background: url("https://i.ibb.co/DKJYwVT/a1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  38%{
+      background: url("https://i.ibb.co/7y2nQc5/a2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  73%{
+      background:url("https://i.ibb.co/F6M0HNt/a3.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+}
+
+
+
+
+.actionbear{
+  background: url("https://i.ibb.co/QnjyJrj/b1.png");
+
+  animation: bear 1s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes bear{
+  14%{
+      background: url("https://i.ibb.co/QnjyJrj/b1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  28%{
+      background: url("https://i.ibb.co/FxcG1qx/b2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  42%{
+      background:url("https://i.ibb.co/rFckbTt/b3.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  64%{
+      background:url("https://i.ibb.co/vXDQMVk/b4.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  75%{
+      background:url("https://i.ibb.co/jHHX54X/b5.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  89%{
+      background:url("https://i.ibb.co/2MFZpPJ/b6.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+}
+
+
+
+.actionman{
+  background: url("https://i.ibb.co/25mCBcJ/m1.png");
+
+  animation: man 0.8s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes man{
+  0%{
+      background: url("https://i.ibb.co/25mCBcJ/m1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  50%{
+      background: url("https://i.ibb.co/4VwhSjn/m2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+ 
+}
+
+
+
+
+.actioncat{
+  background: url("https://i.ibb.co/BsWtjCr/c1.png");
+
+  animation: cat 0.8s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes cat{
+  0%{
+      background: url("https://i.ibb.co/BsWtjCr/c1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  38%{
+      background: url("https://i.ibb.co/my5rtFW/c2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  73%{
+      background:url("https://i.ibb.co/L6dvQ86/c3.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+}
+
+
+
+.actiondog{
+  background: url("https://i.ibb.co/bN6nQhs/d1.png");
+
+  animation: dog 1.3s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes dog{
+  0%{
+      background: url("https://i.ibb.co/bN6nQhs/d1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  50%{
+      background: url("https://i.ibb.co/FWcZrP3/d2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  
+}
+
+.actionelephant{
+  background: url("https://i.ibb.co/DKG5t6D/f1.png");
+
+  animation: elephant 1s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes elephant{
+  0%{
+      background: url("https://i.ibb.co/DKG5t6D/f1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  50%{
+      background: url("https://i.ibb.co/9vRdhz8/f2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  
+}
+
+.actiondonkey{
+  background: url("https://i.ibb.co/JsKT38y/g1.png");
+
+  animation: donkey 0.6s  infinite ease;
+  height: 15vh;
+  width: 15vw;
+  background-size: contain;
+  background-position: center;
+  background-repeat:no-repeat;
+}
+@keyframes donkey{
+  0%{
+      background: url("https://i.ibb.co/JsKT38y/g1.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  50%{
+      background: url("https://i.ibb.co/55S1pbN/g2.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat:no-repeat;
+  }
+  
+}
+
+.loader::after{
+  position:absolute;
+  content:attr(data-text);
+  width:100%;
+  text-align:center;
+  font-weight:bold;
+  top: calc(50% + 1.5rem);
+  color:grey;
+}
+
+.cover{
+  
+  position: absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px; 
+  display:flex;
+  justify-content:center;
+  background: rgba(255,255,255,0.3);
+  z-index:10;
+  webkit-transition: opacity .2s ease,visibility 0s;
+    transition: opacity .2s ease,visibility 0s;
+    -webkit-transition-delay: 0s,.3s;
+    transition-delay: 0s,.3s;
+}
+

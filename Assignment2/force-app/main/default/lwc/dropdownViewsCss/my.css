@@ -1,0 +1,8 @@
+span p img, .myclass img{
+    height:120px !important ; 
+    width:150px !important ;
+    margin-bottom: 0px !important;
+    margin-left:11px !important;
+    margin-top:5px !important;
+    border-radius: 3px;;
+}
